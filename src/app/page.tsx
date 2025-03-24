@@ -15,7 +15,7 @@ export default async function Home() {
         </ul>
       }
       <h1>Home</h1>
-      <Button>Click-me!</Button>
+      <Button>Click-me</Button>
     </div>
   )
 }
