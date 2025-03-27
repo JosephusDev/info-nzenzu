@@ -4,14 +4,18 @@ import { Badge } from '@/components/ui/badge'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Separator } from '@/components/ui/separator'
+import Navbar from "../components/ui/navbar"
 import { useFetchPosts } from '@/useCases/Post/useFetchPosts'
 import { formatDate } from '@/utils'
 import { Mail, Search } from 'lucide-react'
 
+
 export default async function Home() {
   const posts = await useFetchPosts()
   return (
+
     <div className='p-0.5 flex flex-col justify-center items-center h-screen gap-2'>
+      <Navbar></Navbar>
       {
         <ul>
           {posts.map(post => (
