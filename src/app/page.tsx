@@ -13,6 +13,11 @@ import { Mail, Search } from 'lucide-react'
 export default async function Home() {
   const posts = await useFetchPosts()
   return (
-    <div className='flex flex-col items-center w-[60%] h-screen gap-2 mx-auto'></div>
+    <div className='flex flex-col items-center w-screen h-screen gap-2 mx-auto'>
+      <div className='flex flex-col w-screen lg:w-[60%] h-full gap-2'>
+        <Highlight />
+      </div>
+      <Footer />
+    </div>
   )
 }
