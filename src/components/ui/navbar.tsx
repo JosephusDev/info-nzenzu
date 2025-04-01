@@ -1,7 +1,7 @@
 'use client'
 
 import Link from 'next/link'
-import { Search, Sun, Moon, Menu, X } from 'lucide-react'
+import { Search, Sun, Moon, Menu, X, Box } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Logo from '@/images/logo.png'
 import Image from 'next/image'
@@ -23,12 +23,12 @@ export default function Navbar() {
   }, [])
 
   return (
-    <nav className='bg-white dark:bg-gray-900 shadow-md fixed top-0 left-0 w-full z-50'>
+    <nav className='bg-background shadow-md fixed top-0 left-0 w-full z-50'>
       <div className='max-w-7xl mx-auto px-4 sm:px-6 lg:px-8'>
         <div className='flex justify-between h-16 items-center'>
           {/* Logo */}
-          <Link href='/' className='flex items-center'>
-            <Image src={Logo} alt='Nzenzu Logo' width={80} height={80} />
+          <Link href='/' className='flex items-center justify-center gap-2'>
+            <Box />
             <span className='text-xl text-gray-900 dark:text-white'>
               Info<span className='font-bold dark:text-white'>Nzenzu</span>
             </span>
@@ -41,31 +41,25 @@ export default function Navbar() {
                 href='/'
                 className='text-gray-700 dark:text-gray-300 hover:text-blue-600'
               >
-                Home
+                Início
               </Link>
               <Link
                 href='/blog'
                 className='text-gray-700 dark:text-gray-300 hover:text-blue-600'
               >
-                Blog
+                Informações
               </Link>
               <Link
                 href='/single-post'
                 className='text-gray-700 dark:text-gray-300 hover:text-blue-600'
               >
-                Single Post
-              </Link>
-              <Link
-                href='/pages'
-                className='text-gray-700 dark:text-gray-300 hover:text-blue-600'
-              >
-                Pages
+                Sobre
               </Link>
               <Link
                 href='/contact'
                 className='text-gray-700 dark:text-gray-300 hover:text-blue-600'
               >
-                Contact
+                Contactos
               </Link>
             </div>
           )}
@@ -74,9 +68,9 @@ export default function Navbar() {
           <div className='flex items-center space-x-4'>
             <div className='relative hidden md:block'>
               <InputIcon
-                className='border-gray-200 rounded-4xl py-0.5'
-                placeholder='Search'
-                Icon={<Search />}
+                className='border-gray-400 rounded-4xl py-0.5'
+                placeholder='Pesquisar...'
+                Icon={<Search size={20} className='text-gray-400' />}
               />
             </div>
 
@@ -105,37 +99,31 @@ export default function Navbar() {
             href='/'
             className='block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600'
           >
-            Home
+            Início
           </Link>
           <Link
             href='/blog'
             className='block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600'
           >
-            Blog
+            Informações
           </Link>
           <Link
             href='/single-post'
             className='block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600'
           >
-            Single Post
-          </Link>
-          <Link
-            href='/pages'
-            className='block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600'
-          >
-            Pages
+            Sobre
           </Link>
           <Link
             href='/contact'
             className='block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600'
           >
-            Contact
+            Contactos
           </Link>
           <div className='mt-4'>
             <InputIcon
-              className='border-gray-200 rounded-4xl py-0.5 w-full'
-              placeholder='Search'
-              Icon={<Search />}
+              className='border-gray-400 rounded-4xl py-0.5 w-full'
+              placeholder='Pesquisar...'
+              Icon={<Search size={20} className='text-gray-400' />}
             />
           </div>
         </div>
