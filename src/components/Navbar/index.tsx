@@ -29,8 +29,8 @@ export default function Navbar() {
           {/* Logo */}
           <Link href='/' className='flex items-center justify-center gap-2'>
             <Box />
-            <span className='text-xl text-gray-900 dark:text-white'>
-              Info<span className='font-bold dark:text-white'>Nzenzu</span>
+            <span className='text-xl'>
+              Info<span className='font-bold'>Nzenzu</span>
             </span>
           </Link>
 
@@ -70,7 +70,7 @@ export default function Navbar() {
               <InputIcon
                 className='border-gray-400 rounded-4xl py-0.5'
                 placeholder='Pesquisar...'
-                Icon={<Search size={20} className='text-gray-400' />}
+                icon={<Search size={20} className='text-gray-400' />}
               />
             </div>
 
@@ -123,7 +123,7 @@ export default function Navbar() {
             <InputIcon
               className='border-gray-400 rounded-4xl py-0.5 w-full'
               placeholder='Pesquisar...'
-              Icon={<Search size={20} className='text-gray-400' />}
+              icon={<Search size={20} className='text-gray-400' />}
             />
           </div>
         </div>

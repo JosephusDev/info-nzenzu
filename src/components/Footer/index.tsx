@@ -42,7 +42,7 @@ export default function Footer() {
                   Escreva uma mensagem rápida para nós.
                 </p>
                 <InputIcon
-                  Icon={<Mail className='text-gray-400' />}
+                  icon={<Mail className='text-gray-400' />}
                   placeholder='Escreva sua mensagem'
                   className='w-full py-1'
                 />
