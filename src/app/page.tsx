@@ -1,6 +1,6 @@
 import Footer from '@/components/Footer'
 import { Highlight } from '@/components/Highlight'
-import Navbar from '../components/ui/navbar'
+import Navbar from '../components/Navbar'
 import { Post } from '@/components/Post'
 import { Posts } from '@/mock/posts'
 
