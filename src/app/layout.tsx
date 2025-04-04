@@ -1,13 +1,13 @@
 import type { Metadata } from 'next'
-import { Work_Sans } from 'next/font/google'
+import { Nunito, Nunito_Sans } from 'next/font/google'
 import './globals.css'
 
-const geistSans = Work_Sans({
+const geistSans = Nunito_Sans({
   variable: '--font-geist-sans',
   subsets: ['latin'],
 })
 
-const geistMono = Work_Sans({
+const geistMono = Nunito({
   variable: '--font-geist-mono',
   subsets: ['latin'],
 })

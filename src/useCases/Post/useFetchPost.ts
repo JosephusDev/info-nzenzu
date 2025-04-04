@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 
-export async function useFetchPost({ id }: { id: string }) {
+export async function getUniquePost({ id }: { id: string }) {
   const posts = await prisma.post.findUnique({
     where: {
       id,
@@ -9,6 +9,7 @@ export async function useFetchPost({ id }: { id: string }) {
       user: {
         select: {
           name: true,
+          avatarImage: true,
         },
       },
     },

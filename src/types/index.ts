@@ -1,8 +1,9 @@
+import { Post, User } from '@prisma/client'
+
+export type PostType = Post & { user: Pick<User, 'name' | 'avatarImage'> }
+
 export interface PostProps extends React.HTMLAttributes<HTMLDivElement> {
-  title: string
-  author: string
-  date: Date
-  image?: string
-  avatarImage?: string
-  category: string
+  post: PostType
+  isIndividual?: boolean
+  hideImage?: boolean
 }

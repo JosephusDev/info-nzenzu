@@ -3,10 +3,9 @@
 import Link from 'next/link'
 import { Search, Sun, Moon, Menu, X, Box } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import Logo from '@/images/logo.png'
-import Image from 'next/image'
 import { InputIcon } from '../InputIcon'
 import { useState, useEffect } from 'react'
+import { ModalSearch } from '../ModalSearch'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -67,11 +66,7 @@ export default function Navbar() {
           {/* Ações */}
           <div className='flex items-center space-x-4'>
             <div className='relative hidden md:block'>
-              <InputIcon
-                className='border-gray-400 rounded-4xl py-0.5'
-                placeholder='Pesquisar...'
-                icon={<Search size={20} className='text-gray-400' />}
-              />
+              <ModalSearch />
             </div>
 
             <Button variant='ghost' size='icon'>
@@ -120,11 +115,7 @@ export default function Navbar() {
             Contactos
           </Link>
           <div className='mt-4'>
-            <InputIcon
-              className='border-gray-400 rounded-4xl py-0.5 w-full'
-              placeholder='Pesquisar...'
-              icon={<Search size={20} className='text-gray-400' />}
-            />
+            <ModalSearch />
           </div>
         </div>
       )}

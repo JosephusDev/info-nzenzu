@@ -1,14 +1,18 @@
-import prisma from "@/lib/prisma";
+import prisma from '@/lib/prisma'
 
-export async function useFetchPosts(){
-    const posts = await prisma.post.findMany({
-        include: {
-            user: {
-                select: {
-                    name: true,
-                },
-            }
-        }
-    });
-    return posts;
+export async function getPosts() {
+  const posts = await prisma.post.findMany({
+    include: {
+      user: {
+        select: {
+          name: true,
+          avatarImage: true,
+        },
+      },
+    },
+    orderBy: {
+      created_at: 'desc',
+    },
+  })
+  return posts
 }

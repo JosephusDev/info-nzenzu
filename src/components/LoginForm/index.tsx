@@ -22,10 +22,10 @@ export function LoginForm({
           <CardTitle className='flex flex-col items-center gap-2'>
             <Box />
             <span className='text-xl text-gray-900 dark:text-white'>
-              Info<span className='font-bold dark:text-white'>Nzenzu</span>
+              Info<span className='font-extrabold dark:text-white'>Nzenzu</span>
             </span>
           </CardTitle>
-          <CardDescription className='text-center'>
+          <CardDescription className='text-center text-base'>
             Informe suas credenciais de acesso
           </CardDescription>
         </CardHeader>

@@ -17,6 +17,7 @@ model User {
   name String
   username String @unique
   password  String
+  avatarImage String?
   level AccessLevel @default(USER)
   posts Post[]
 }
@@ -24,7 +25,8 @@ model User {
 model Post {
   id        String     @id @default(uuid())
   title     String
-  content   String?
+  description   String?
+  category String
   published Boolean @default(false)
   userId  String
   image String?
