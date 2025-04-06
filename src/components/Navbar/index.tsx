@@ -3,7 +3,6 @@
 import Link from 'next/link'
 import { Search, Sun, Moon, Menu, X, Box } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { InputIcon } from '../InputIcon'
 import { useState, useEffect } from 'react'
 import { ModalSearch } from '../ModalSearch'
 

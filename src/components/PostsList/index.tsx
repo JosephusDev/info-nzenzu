@@ -6,13 +6,13 @@ import { Post } from '@/components/Post'
 import { PostType } from '@/types'
 
 export function PostsList({ posts }: { posts: PostType[] }) {
-  const [visibleCount, setVisibleCount] = useState(6)
+  const [visibleCount, setVisibleCount] = useState(7)
 
   const handleToggle = () => {
     if (visibleCount >= posts.length) {
-      setVisibleCount(6)
+      setVisibleCount(7)
     } else {
-      setVisibleCount(prev => Math.min(prev + 6, posts.length))
+      setVisibleCount(prev => Math.min(prev + 7, posts.length))
     }
   }
 
@@ -21,7 +21,7 @@ export function PostsList({ posts }: { posts: PostType[] }) {
   return (
     <div>
       <div className='px-6 md:px-20 lg:px-20 grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4'>
-        {posts.slice(0, visibleCount).map((post, idx) => {
+        {posts.slice(1, visibleCount).map((post, idx) => {
           return (
             <Link key={idx} href={`/post/${post.id}`}>
               <Post key={idx} post={post} />

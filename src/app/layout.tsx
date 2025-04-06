@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Nunito, Nunito_Sans } from 'next/font/google'
+import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 
 const geistSans = Nunito_Sans({
@@ -30,6 +31,7 @@ export default function RootLayout({
         <div className='font-[family-name:var(--font-geist-sans)]'>
           {children}
         </div>
+        <Toaster richColors />
       </body>
     </html>
   )

@@ -37,17 +37,17 @@ export default function Footer() {
           <div className='sm:w-full md:w-full lg:w-3/5'>
             <Card className='w-full border-0 shadow-0 rounded-sm'>
               <CardContent className='flex flex-col items-center gap-2'>
-                <h1 className='text-base font-semibold'>Mensagem rápida</h1>
+                <h1 className='text-base font-bold'>Newsletter</h1>
                 <p className='text-sm mb-4'>
-                  Escreva uma mensagem rápida para nós.
+                  Informe seu email para receber novidades.
                 </p>
                 <InputIcon
                   icon={<Mail className='text-gray-400' />}
-                  placeholder='Escreva sua mensagem'
+                  placeholder='Endereço de email'
                   className='w-full py-1'
                 />
                 <Button className='w-full'>
-                  <Send size={20} /> Enviar
+                  <Send size={20} /> Subscrever
                 </Button>
               </CardContent>
             </Card>

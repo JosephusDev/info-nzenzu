@@ -1,5 +1,4 @@
 'use client'
-
 import * as React from 'react'
 import { Send, Users } from 'lucide-react'
 
@@ -11,13 +10,10 @@ import {
   SidebarFooter,
   SidebarRail,
 } from '@/components/ui/sidebar'
+import { User } from '@prisma/client'
 
 // This is sample data.
 const data = {
-  user: {
-    name: 'Oliver Preysler',
-    nivel: 'Admin',
-  },
   items: [
     {
       title: 'Postagens',
@@ -26,20 +22,23 @@ const data = {
     },
     {
       title: 'Usuários',
-      url: '/usuarios',
+      url: '/dashboard/usuarios',
       icon: Users,
     },
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function AppSidebar({
+  user,
+  ...props
+}: React.ComponentProps<typeof Sidebar> & { user: User }) {
   return (
     <Sidebar collapsible='icon' {...props}>
       <SidebarContent>
         <NavMain items={data.items} />
       </SidebarContent>
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser user={user!} />
       </SidebarFooter>
       <SidebarRail />
     </Sidebar>
