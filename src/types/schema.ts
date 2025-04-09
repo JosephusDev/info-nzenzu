@@ -48,3 +48,15 @@ export type loginSchema = Pick<
   z.infer<typeof userSchema>,
   'password' | 'username'
 >
+
+export const subscriberSchema = z.object({
+  email: z
+    .string({
+      message: 'O email é obrigatório',
+    })
+    .email({
+      message: 'Informe um email válido',
+    }),
+})
+
+export type subscriberSchema = z.infer<typeof subscriberSchema>

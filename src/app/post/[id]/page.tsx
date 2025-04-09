@@ -1,6 +1,6 @@
 import { Main } from '@/components/Main'
 import { Post } from '@/components/Post'
-import { getUniquePost } from '@/useCases/Post/useFetchPost'
+import { getUniquePost } from '@/models/Post/useFetchPost'
 
 export default async function IndividualPost({
   params,
