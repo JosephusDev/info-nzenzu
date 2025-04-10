@@ -1,3 +1,4 @@
+import { AccessLevel } from '@prisma/client'
 import { z } from 'zod'
 
 export const userSchema = z.object({
@@ -17,9 +18,13 @@ export const userSchema = z.object({
     .url({
       message: 'URL inválida para a imagem do avatar',
     })
-    .optional(),
+    .nullable(),
 
-  level: z.enum(['USER', 'ADMIN']).default('USER'),
+  level: z.nativeEnum(AccessLevel, {
+    errorMap: () => ({
+      message: 'Nível de acesso inválido ou não selecionado',
+    }),
+  }),
 
   username: z
     .string({

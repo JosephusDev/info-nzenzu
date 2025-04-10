@@ -2,7 +2,7 @@ import prisma from '@/lib/prisma'
 import { User } from '@prisma/client'
 import bcrypt from 'bcrypt'
 
-export async function useCreateUser(data: Omit<User, 'id' | 'level'>) {
+export async function useCreateUser(data: Omit<User, 'id'>) {
   try {
     const hashedPassword = await bcrypt.hash(data.password, 10)
     const user = await prisma.user.create({
