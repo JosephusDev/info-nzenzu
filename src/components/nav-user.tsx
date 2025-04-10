@@ -21,6 +21,7 @@ import { Avatar, AvatarFallback, AvatarImage } from './ui/avatar'
 import { formatedName } from '@/utils'
 import { User as UserType } from '@prisma/client'
 import { LogoutButton } from './LogoutButton'
+import Link from 'next/link'
 
 export function NavUser({ user }: { user: UserType }) {
   const { isMobile } = useSidebar()
@@ -68,10 +69,12 @@ export function NavUser({ user }: { user: UserType }) {
               </div>
             </DropdownMenuLabel>
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <User />
-                Minha conta
-              </DropdownMenuItem>
+              <Link href='/dashboard/perfil'>
+                <DropdownMenuItem>
+                  <User />
+                  Minha conta
+                </DropdownMenuItem>
+              </Link>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem>

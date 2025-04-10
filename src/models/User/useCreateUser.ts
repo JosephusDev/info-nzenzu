@@ -1,14 +1,22 @@
 import prisma from '@/lib/prisma'
 import { User } from '@prisma/client'
-import bcrypt from 'bcrypt'
+import { scrypt, randomBytes } from 'crypto'
+import { promisify } from 'util'
 
-export async function useCreateUser(data: Omit<User, 'id' | 'level'>) {
+const scryptAsync = promisify(scrypt)
+
+export async function createUser(data: Omit<User, 'id' | 'level'>) {
   try {
-    const hashedPassword = await bcrypt.hash(data.password, 10)
+    const salt = randomBytes(16).toString('hex')
+    const hashedPassword = (await scryptAsync(
+      data.password,
+      salt,
+      64,
+    )) as Buffer
     const user = await prisma.user.create({
       data: {
         ...data,
-        password: hashedPassword,
+        password: `${hashedPassword.toString('hex')}.${salt}`,
       },
     })
     return user

@@ -6,7 +6,7 @@ import { Skeleton } from '@/components/ui/skeleton'
 import Image from 'next/image'
 import Link from 'next/link'
 import { EmptyIcon } from '../EmptyIcon'
-import { HighlightSkeleton } from '../skeleton/HighlightSkeleton'
+import { PostSkeleton } from '../skeleton/PostSkeleton'
 
 export function Highlight() {
   const { data, isLoading } = usePosts({})
@@ -23,7 +23,9 @@ export function Highlight() {
   return (
     <div className='w-full h-auto flex flex-col gap-4 relative mb-14 sm:mt-14'>
       {isLoading ? (
-        <HighlightSkeleton />
+        <div className='sm:my-4 mx-4 my-14'>
+          <PostSkeleton />
+        </div>
       ) : (
         <div>
           <Image

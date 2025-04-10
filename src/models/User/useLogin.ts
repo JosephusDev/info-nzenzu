@@ -1,5 +1,9 @@
 import prisma from '@/lib/prisma'
 import { User } from '@prisma/client'
+import { scrypt } from 'crypto'
+import { promisify } from 'util'
+
+const scryptAsync = promisify(scrypt)
 
 export async function useLogin({
   username,
@@ -14,7 +18,14 @@ export async function useLogin({
       throw new Error('Utilizador não encontrado')
     }
 
-    if (password !== user.password) {
+    const [hashedPassword, salt] = user.password.split('.')
+    const hashedPasswordBuffer = (await scryptAsync(
+      password,
+      salt,
+      64,
+    )) as Buffer
+
+    if (hashedPasswordBuffer.toString('hex') !== hashedPassword) {
       throw new Error('Palavra-passe incorreta')
     }
 

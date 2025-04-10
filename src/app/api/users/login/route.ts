@@ -1,11 +1,11 @@
 import { createSession } from '@/lib/session'
 import { useLogin } from '@/models/User/useLogin'
-import { loginSchema } from '@/types/schema'
+import { LoginFormData } from '@/types/schema'
 import { NextRequest, NextResponse } from 'next/server'
 
 export async function POST(req: NextRequest) {
   try {
-    const body: loginSchema = await req.json()
+    const body: LoginFormData = await req.json()
 
     if (!body.username || !body.password) {
       return NextResponse.json(

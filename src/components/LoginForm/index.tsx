@@ -12,7 +12,7 @@ import { Label } from '@/components/ui/label'
 import { Box, Loader2, Lock, User } from 'lucide-react'
 import { InputIcon } from '../InputIcon'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { loginSchema, userSchema } from '@/types/schema'
+import { loginSchema, LoginFormData } from '@/types/schema'
 import { LabelError } from '../LabelError'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
@@ -26,13 +26,13 @@ export function LoginForm({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<loginSchema>({
-    resolver: zodResolver(userSchema.pick({ username: true, password: true })),
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
   })
 
   const [loading, setLoading] = useState(false)
 
-  const onSubmit: SubmitHandler<loginSchema> = async data => {
+  const onSubmit: SubmitHandler<LoginFormData> = async data => {
     setLoading(true)
     try {
       const res = await fetch('/api/users/login', {
