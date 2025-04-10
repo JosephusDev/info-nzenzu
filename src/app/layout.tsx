@@ -2,6 +2,8 @@ import type { Metadata } from 'next'
 import { Nunito, Nunito_Sans } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
+import { QueryClient } from '@tanstack/react-query'
+import Providers from './providers'
 
 const geistSans = Nunito_Sans({
   variable: '--font-geist-sans',
@@ -23,13 +25,14 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const queryClient = new QueryClient()
   return (
     <html lang='pt'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className='font-[family-name:var(--font-geist-sans)]'>
-          {children}
+          <Providers>{children}</Providers>
         </div>
         <Toaster richColors />
       </body>

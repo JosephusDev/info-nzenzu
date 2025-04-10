@@ -1,4 +1,5 @@
 'use client'
+
 import { Button } from '@/components/ui/button'
 import {
   Dialog,
@@ -7,33 +8,20 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Book, BookOpen, File, Search } from 'lucide-react'
+import { BookOpen, Search } from 'lucide-react'
 import { InputIcon } from '../InputIcon'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { EmptyIcon } from '../EmptyIcon'
 import Link from 'next/link'
-import { PostType } from '@/types'
+import { usePosts } from '@/hooks/usePosts'
+import { Loader2 } from 'lucide-react'
 
 export function ModalSearch() {
-  const [posts, setPosts] = useState<PostType[]>([])
   const [search, setSearch] = useState('')
-  useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await fetch('/api/posts')
-        const data = await response.json()
-        setPosts(data)
-      } catch (err) {
-        console.error('Error fetching posts:', err)
-      }
-    }
+  const { data, isLoading } = usePosts({ search })
 
-    fetchPosts()
-  }, [])
-
-  const filteredPosts = posts.filter(post =>
-    post.title.toLowerCase().includes(search.toLowerCase()),
-  )
+  // Une todas as páginas da resposta do React Query
+  const filteredPosts = data?.pages.flat() || []
 
   return (
     <Dialog>
@@ -63,10 +51,15 @@ export function ModalSearch() {
             />
           </div>
         </div>
+
         <div>
           {search ? (
             <div>
-              {filteredPosts.length === 0 ? (
+              {isLoading ? (
+                <div className='flex justify-center mt-5'>
+                  <Loader2 className='animate-spin' />
+                </div>
+              ) : filteredPosts.length === 0 ? (
                 <EmptyIcon title='Nenhum resultado encontrado' />
               ) : (
                 <div className='flex flex-col gap-4 '>
@@ -75,11 +68,8 @@ export function ModalSearch() {
                     <ul className='flex flex-col gap-2'>
                       {filteredPosts.map(post => (
                         <Link key={post.id} href={`/post/${post.id}`}>
-                          <li
-                            className='flex p-2 bg-muted gap-2 items-center rounded-lg font-semibold'
-                            key={post.id}
-                          >
-                            <BookOpen size={20} className='text-gray-400' />{' '}
+                          <li className='flex p-2 bg-muted gap-2 items-center rounded-lg font-semibold'>
+                            <BookOpen size={20} className='text-gray-400' />
                             <p>{post.title}</p>
                           </li>
                         </Link>

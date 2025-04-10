@@ -9,13 +9,14 @@ import {
   CardTitle,
 } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
-import { Box, LoaderIcon, Lock, User } from 'lucide-react'
+import { Box, Loader2, Lock, User } from 'lucide-react'
 import { InputIcon } from '../InputIcon'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { loginSchema, userSchema } from '@/types/schema'
+import { loginSchema, LoginFormData } from '@/types/schema'
 import { LabelError } from '../LabelError'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useState } from 'react'
+import { toast } from 'sonner'
 
 export function LoginForm({
   className,
@@ -25,24 +26,35 @@ export function LoginForm({
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<loginSchema>({
-    resolver: zodResolver(userSchema.pick({ username: true, password: true })),
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(loginSchema),
   })
 
   const [loading, setLoading] = useState(false)
 
-  const onSubmit: SubmitHandler<loginSchema> = async data => {
+  const onSubmit: SubmitHandler<LoginFormData> = async data => {
     setLoading(true)
-    await fetch('/api/users', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }).finally(() => {
-      setLoading(false)
+    try {
+      const res = await fetch('/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      const result = await res.json()
+
+      if (!res.ok) {
+        throw new Error(result.error || 'Erro desconhecido')
+      }
+
       window.location.href = '/dashboard'
-    })
+    } catch (error: any) {
+      toast.error(error.message || 'Algo deu errado.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -61,7 +73,7 @@ export function LoginForm({
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <div className='flex flex-col gap-6'>
+            <div className='flex flex-col gap-4'>
               <div className='grid gap-3'>
                 <Label htmlFor='email'>Utilizador</Label>
                 <InputIcon
@@ -88,12 +100,8 @@ export function LoginForm({
                 )}
               </div>
               <div className='flex flex-col gap-3'>
-                <Button
-                  disabled={loading ? true : false}
-                  type='submit'
-                  className='w-full'
-                >
-                  {loading ? <LoaderIcon className='animate-spin' /> : 'Entrar'}
+                <Button disabled={loading} type='submit' className='w-full'>
+                  {loading ? <Loader2 className='animate-spin' /> : 'Entrar'}
                 </Button>
               </div>
             </div>

@@ -1,11 +1,11 @@
-import { verifySession } from '@/app/lib/dal'
+import { verifySession } from '@/lib/dal'
 import { AppSidebar } from '@/components/app-sidebar'
 import {
   SidebarInset,
   SidebarProvider,
   SidebarTrigger,
 } from '@/components/ui/sidebar'
-import { getUser } from '@/useCases/User/useFetchUserById'
+import { getUser } from '@/models/User/useFetchUserById'
 
 export default async function DashboardContent({
   children,

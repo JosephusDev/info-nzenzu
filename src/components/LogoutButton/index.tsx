@@ -1,6 +1,6 @@
 'use client'
 
-import { deleteSession } from '@/app/lib/session'
+import { deleteSession } from '@/lib/session'
 import { Button } from '../ui/button'
 import { LogOut } from 'lucide-react'
 

@@ -1,28 +1,45 @@
-import { createSession } from '@/app/lib/session'
-import { loginSchema } from '@/types/schema'
-import { useLogin } from '@/useCases/User/useLogin'
-import { NextRequest, NextResponse } from 'next/server'
+import { NextResponse } from 'next/server'
+import { updateUser } from '@/models/User/useUpdateUser'
+import { verifySession } from '@/lib/dal'
+import { User } from '@prisma/client'
+import { createUser } from '@/models/User/useCreateUser'
 
-export async function POST(req: NextRequest) {
+export async function POST(request: Request) {
   try {
-    const body: loginSchema = await req.json()
+    const body: User = await request.json()
+    const { name, username, password, avatarImage } = body
 
-    if (!body.username || !body.password) {
-      return NextResponse.json(
-        { error: 'Usuário e palavra-passe são obrigatórios' },
-        { status: 400 },
-      )
-    }
-
-    const data = await useLogin(body)
-
-    if (data.id) {
-      await createSession(data.id)
-    }
-
-    return NextResponse.json(data)
+    const user = await createUser({ name, username, password, avatarImage })
+    return NextResponse.json(user)
   } catch (error) {
-    console.error(error)
-    return NextResponse.json({ error: error }, { status: 404 })
+    return NextResponse.json(
+      { error: 'Erro ao criar usuário' },
+      { status: 500 },
+    )
+  }
+}
+
+export async function PUT(request: Request) {
+  try {
+    const { isAuth, userId } = await verifySession()
+
+    if (!isAuth) {
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+    }
+
+    const body = await request.json()
+    const { id, data } = body
+
+    if (id !== userId) {
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+    }
+
+    const user = await updateUser({ id, data })
+    return NextResponse.json(user)
+  } catch (error) {
+    return NextResponse.json(
+      { error: 'Erro ao atualizar usuário' },
+      { status: 500 },
+    )
   }
 }

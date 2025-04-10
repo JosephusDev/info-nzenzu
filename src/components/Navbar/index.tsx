@@ -42,19 +42,19 @@ export default function Navbar() {
                 Início
               </Link>
               <Link
-                href='/blog'
+                href='/postagens'
                 className='text-gray-700 dark:text-gray-300 hover:text-blue-600'
               >
-                Informações
+                Postagens
               </Link>
               <Link
-                href='/single-post'
+                href='#sobre'
                 className='text-gray-700 dark:text-gray-300 hover:text-blue-600'
               >
                 Sobre
               </Link>
               <Link
-                href='/contact'
+                href='#contatos'
                 className='text-gray-700 dark:text-gray-300 hover:text-blue-600'
               >
                 Contactos
@@ -96,19 +96,19 @@ export default function Navbar() {
             Início
           </Link>
           <Link
-            href='/blog'
+            href='/postagens'
             className='block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600'
           >
-            Informações
+            Postagens
           </Link>
           <Link
-            href='/single-post'
+            href='#sobre'
             className='block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600'
           >
             Sobre
           </Link>
           <Link
-            href='/contact'
+            href='#contatos'
             className='block py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600'
           >
             Contactos
