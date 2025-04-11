@@ -12,8 +12,9 @@ import { toast } from 'sonner'
 import { User } from '@prisma/client'
 import { z } from 'zod'
 import { useState } from 'react'
-import { Loader2 } from 'lucide-react'
+import { Loader2, LockIcon, User as UserIcon } from 'lucide-react'
 import { FileUpload } from '../UploadFiles'
+import { InputIcon } from '../InputIcon'
 
 type FormData = z.infer<typeof userSchema>
 
@@ -98,43 +99,51 @@ export function ProfileForm({ user }: { user: User }) {
     <form onSubmit={handleSubmit(onSubmit)} className='w-full space-y-4'>
       <div className='space-y-2'>
         <Label htmlFor='name'>Nome completo</Label>
-        <Input
+        <InputIcon
           {...register('name')}
           id='name'
           placeholder='Seu nome completo'
+          icon={<UserIcon size={20} />}
+          className='py-0.5'
         />
         {errors.name && <LabelError message={errors.name.message!} />}
       </div>
 
       <div className='space-y-2'>
         <Label htmlFor='username'>Utilizador</Label>
-        <Input
+        <InputIcon
           {...register('username')}
           id='username'
           type='text'
           placeholder='Seu utilizador'
+          icon={<UserIcon size={20} />}
+          className='py-0.5'
         />
         {errors.username && <LabelError message={errors.username.message!} />}
       </div>
 
       <div className='space-y-2'>
         <Label htmlFor='password'>Nova senha</Label>
-        <Input
+        <InputIcon
           {...register('password')}
           id='password'
           type='password'
           placeholder='••••••••'
+          icon={<LockIcon size={20} />}
+          className='py-0.5'
         />
         {errors.password && <LabelError message={errors.password.message!} />}
       </div>
 
       <div className='space-y-2'>
         <Label htmlFor='confirm-password'>Confirmar nova senha</Label>
-        <Input
+        <InputIcon
           {...register('confirmPassword')}
           id='confirm-password'
           type='password'
           placeholder='••••••••'
+          icon={<LockIcon size={20} />}
+          className='py-0.5'
         />
         {errors.confirmPassword && (
           <LabelError message={errors.confirmPassword.message!} />
