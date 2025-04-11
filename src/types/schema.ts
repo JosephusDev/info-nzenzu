@@ -1,3 +1,4 @@
+import { AccessLevel } from '@prisma/client'
 import { z } from 'zod'
 
 export const userSchema = z
@@ -20,7 +21,11 @@ export const userSchema = z
       })
       .nullable(),
 
-    level: z.enum(['USER', 'ADMIN']),
+    level: z.nativeEnum(AccessLevel, {
+      errorMap: () => ({
+        message: 'Nível de acesso inválido ou não selecionado',
+      }),
+    }),
 
     username: z
       .string({
