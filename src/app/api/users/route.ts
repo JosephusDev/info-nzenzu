@@ -7,9 +7,8 @@ import { createUser } from '@/models/User/useCreateUser'
 export async function POST(request: Request) {
   try {
     const body: User = await request.json()
-    const { name, username, password, avatarImage } = body
 
-    const user = await createUser({ name, username, password, avatarImage })
+    const user = await createUser(body)
     return NextResponse.json(user)
   } catch (error) {
     return NextResponse.json(

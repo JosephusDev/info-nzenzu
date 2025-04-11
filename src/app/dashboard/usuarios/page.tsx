@@ -2,7 +2,7 @@ import DashboardContent from '@/components/Dashboard'
 import { DataTable } from '@/components/DataTable'
 import { columns } from '@/components/DataTable/columns'
 import { ModalAddUser } from '@/components/ModalAddUser'
-import { useFetchUsers } from '@/useCases/User/useFetchUsers'
+import { useFetchUsers } from '@/models/User/useFetchUsers'
 
 export default async function Page() {
   const userData = await useFetchUsers()

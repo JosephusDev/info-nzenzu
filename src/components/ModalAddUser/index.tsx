@@ -13,52 +13,77 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
-import { LoaderIcon, Lock, Plus, User } from 'lucide-react'
+import { Loader2, Lock, Plus, User } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { InputIcon } from '../InputIcon'
 import { useState } from 'react'
 import { Controller, SubmitHandler, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { userSchema } from '@/types/schema'
 import { Label } from '../ui/label'
 import { LabelError } from '../LabelError'
 import { User as UserType } from '@prisma/client'
+import { userSchema } from '@/types/schema'
+import { z } from 'zod'
+import { toast } from 'sonner'
+import { useRouter } from 'next/navigation'
+
+type FormData = z.infer<typeof userSchema>
 
 export function ModalAddUser() {
+  const router = useRouter()
   const {
     register,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<Omit<UserType, 'id' | 'avatarImage'>>({
-    resolver: zodResolver(userSchema.omit({ avatarImage: true })),
+  } = useForm<FormData>({
+    resolver: zodResolver(userSchema),
+    defaultValues: {
+      name: '',
+      username: '',
+      password: '',
+      level: 'USER',
+      avatarImage: null,
+      confirmPassword: '',
+    },
   })
 
   const [loading, setLoading] = useState(false)
 
-  const onSubmit: SubmitHandler<
-    Omit<UserType, 'id' | 'avatarImage'>
-  > = async data => {
-    setLoading(true)
-    await fetch('/api/users/create', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }).finally(() => {
+  const onSubmit = async (data: FormData) => {
+    try {
+      setLoading(true)
+      const response = await fetch('/api/users', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          name: data.name,
+          username: data.username,
+          password: data.password,
+          level: data.level,
+        }),
+      })
+      const result = await response.json()
+
+      if (!response.ok) {
+        throw new Error(result.error || 'Erro ao cadastrar utilizador')
+      }
       setLoading(false)
-      window.location.href = '/dashboard/usuarios'
-    })
+      toast.success('Utilizador cadastrado com sucesso!')
+      router.refresh()
+    } catch (error) {
+      toast.error(
+        error instanceof Error ? error.message : 'Erro ao cadastrar utilizador',
+      )
+    }
   }
 
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button
-          variant={'outline'}
-          className='rounded-lg gap-2 w-full text-gray-400'
-        >
+        <Button className='rounded-lg gap-2 w-full'>
           <Plus size={20} />
           Adicionar
         </Button>
@@ -77,7 +102,7 @@ export function ModalAddUser() {
                 <InputIcon
                   icon={<User size={15} className='text-gray-400' />}
                   placeholder='Digite o nome completo'
-                  {...register('name', { required: true })}
+                  {...register('name')}
                   className='py-0.5'
                 />
                 {errors.name && <LabelError message={errors.name.message!} />}
@@ -87,7 +112,7 @@ export function ModalAddUser() {
                 <InputIcon
                   icon={<User size={15} className='text-gray-400' />}
                   placeholder='Digite o nome de utilizador'
-                  {...register('username', { required: true })}
+                  {...register('username')}
                   className='py-0.5'
                 />
                 {errors.username && (
@@ -99,12 +124,27 @@ export function ModalAddUser() {
                 <InputIcon
                   icon={<Lock size={15} className='text-gray-400' />}
                   type='password'
-                  placeholder='Digite a palavra-passe'
-                  {...register('password', { required: true })}
+                  placeholder='••••••••'
+                  {...register('password')}
                   className='py-0.5'
                 />
                 {errors.password && (
                   <LabelError message={errors.password.message!} />
+                )}
+              </div>
+
+              <div className='grid gap-3'>
+                <Label htmlFor='confirm-password'>Confirmar nova senha</Label>
+                <InputIcon
+                  icon={<Lock size={15} className='text-gray-400' />}
+                  {...register('confirmPassword')}
+                  id='confirm-password'
+                  type='password'
+                  placeholder='••••••••'
+                  className='py-0.5'
+                />
+                {errors.confirmPassword && (
+                  <LabelError message={errors.confirmPassword.message!} />
                 )}
               </div>
               <div className='grid gap-3'>
@@ -129,16 +169,8 @@ export function ModalAddUser() {
                 {errors.level && <LabelError message={errors.level.message!} />}
               </div>
               <div className='flex flex-col gap-3'>
-                <Button
-                  disabled={loading ? true : false}
-                  type='submit'
-                  className='w-full'
-                >
-                  {loading ? (
-                    <LoaderIcon className='animate-spin' />
-                  ) : (
-                    'Cadastrar'
-                  )}
+                <Button disabled={loading} type='submit' className='w-full'>
+                  {loading ? <Loader2 className='animate-spin' /> : 'Cadastrar'}
                 </Button>
               </div>
             </div>
