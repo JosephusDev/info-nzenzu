@@ -8,8 +8,8 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
-import { Button } from '../ui/button'
+} from '../../ui/dropdown-menu'
+import { Button } from '../../ui/button'
 import { ArrowsUpFromLine, MoreHorizontal, Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'

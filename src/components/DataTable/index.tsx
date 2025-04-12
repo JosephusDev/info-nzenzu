@@ -24,11 +24,17 @@ import { Button } from '../ui/button'
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
   data: TData[]
+  filterColumn?: string
+  placeholder?: string
+  showFilter?: boolean
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
+  filterColumn,
+  showFilter = true,
+  placeholder = 'Filtrar por nome...',
 }: DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
@@ -45,16 +51,18 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className='w-full h-full flex flex-col gap-4'>
-      <div>
-        <Input
-          placeholder='Filtrar por nome...'
-          value={(table.getColumn('name')?.getFilterValue() as string) ?? ''}
-          onChange={event =>
-            table.getColumn('name')?.setFilterValue(event.target.value)
-          }
-          className='max-w-sm'
-        />
-      </div>
+      {showFilter && filterColumn && (
+        <div>
+          <Input
+            placeholder={placeholder}
+            value={(table.getColumn(filterColumn)?.getFilterValue() as string) ?? ''}
+            onChange={event =>
+              table.getColumn(filterColumn)?.setFilterValue(event.target.value)
+            }
+            className='max-w-sm'
+          />
+        </div>
+      )}
       <div className='rounded-md border'>
         <Table>
           <TableHeader>

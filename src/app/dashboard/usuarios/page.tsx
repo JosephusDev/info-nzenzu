@@ -1,6 +1,6 @@
 import DashboardContent from '@/components/Dashboard'
 import { DataTable } from '@/components/DataTable'
-import { columns } from '@/components/DataTable/columns'
+import { columns } from '@/components/DataTable/columns/user'
 import { ModalAddUser } from '@/components/ModalAddUser'
 import { useFetchUsers } from '@/models/User/useFetchUsers'
 
@@ -21,7 +21,7 @@ export default async function Page() {
           </div>
         </div>
         <div className='px-4'>
-          <DataTable columns={columns} data={userData} />
+          <DataTable columns={columns} data={userData} filterColumn='name' />
         </div>
       </div>
     </DashboardContent>
