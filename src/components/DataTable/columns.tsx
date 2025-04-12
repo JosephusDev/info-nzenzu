@@ -11,8 +11,11 @@ import {
 } from '../ui/dropdown-menu'
 import { Button } from '../ui/button'
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 import { MoreHorizontal } from 'lucide-react'
 =======
+=======
+>>>>>>> Stashed changes
 import { ArrowsUpFromLine, MoreHorizontal, Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
@@ -37,6 +40,27 @@ export const columns: ColumnDef<User>[] = [
     header: 'Ações',
     cell: ({ row }) => {
       const user = row.original
+
+      const handleDelete = async () => {
+        try {
+          const response = await fetch('/api/users', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: user.id }),
+          })
+
+          if (!response.ok) {
+            throw new Error('Erro ao eliminar usuário do banco de dados')
+          }
+
+          toast.success('Usuário eliminado com sucesso')
+          router.refresh()
+        } catch (error) {
+          toast.error('Erro ao eliminar usuário cadastrado')
+        }
+      }
 
       const handleDelete = async () => {
         try {
@@ -85,6 +109,9 @@ export const columns: ColumnDef<User>[] = [
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleDelete}>
               <Trash /> Eliminar
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             </DropdownMenuItem>
           </DropdownMenuContent>
