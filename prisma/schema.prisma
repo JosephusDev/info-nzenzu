@@ -27,7 +27,7 @@ model Post {
   title     String
   description   String?
   category String
-  published Boolean @default(false)
+  published Boolean? @default(false)
   userId  String
   image String?
   created_at DateTime? @default(now())

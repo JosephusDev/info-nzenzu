@@ -2,7 +2,6 @@ import { EmptyIcon } from '@/components/EmptyIcon'
 import { Highlight } from '@/components/Highlight'
 import { Main } from '@/components/Main'
 import { PostsList } from '@/components/PostsList'
-import { getPosts } from '@/models/Post/useFetchPosts'
 import { Fragment } from 'react'
 
 export default async function Postagens() {
