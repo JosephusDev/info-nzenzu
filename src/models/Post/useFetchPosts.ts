@@ -32,5 +32,6 @@ export async function getPosts({
     skip,
     take: limit,
   })
-  return posts
+  const totalPosts = await prisma.post.count()
+  return { posts, totalPosts }
 }

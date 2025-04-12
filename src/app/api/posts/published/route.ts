@@ -1,5 +1,5 @@
-import { getPosts } from '@/models/Post/useFetchPosts'
 import { type NextRequest, NextResponse } from 'next/server'
+import { getPublishedPosts } from '@/models/Post/useFetchPublishedPosts'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
@@ -10,7 +10,7 @@ export async function GET(req: NextRequest) {
   const skip = (page - 1) * limit
 
   try {
-    const data = await getPosts({ limit, search, skip })
+    const data = await getPublishedPosts({ limit, search, skip })
 
     if (!data) {
       return NextResponse.json(

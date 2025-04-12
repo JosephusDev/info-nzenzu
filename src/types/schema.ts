@@ -103,3 +103,38 @@ export const subscriberSchema = z.object({
 })
 
 export type subscriberSchema = z.infer<typeof subscriberSchema>
+
+export const postSchema = z.object({
+  title: z
+    .string({
+      message: 'O título é obrigatório',
+    })
+    .min(3, {
+      message: 'O título deve ter no mínimo 3 caracteres',
+    })
+    .max(100, {
+      message: 'O título não pode ter mais de 100 caracteres',
+    }),
+  description: z
+    .string({
+      message: 'A descrição é obrigatória',
+    })
+    .min(10, {
+      message: 'A descrição deve ter no mínimo 10 caracteres',
+    })
+    .max(500, {
+      message: 'A descrição não pode ter mais de 500 caracteres',
+    }),
+  category: z
+    .string({
+      message: 'A categoria é obrigatória',
+    })
+    .min(3, {
+      message: 'A categoria deve ter no mínimo 3 caracteres',
+    })
+    .max(50, {
+      message: 'A categoria não pode ter mais de 50 caracteres',
+    }),
+})
+
+export type PostFormData = z.infer<typeof postSchema>
