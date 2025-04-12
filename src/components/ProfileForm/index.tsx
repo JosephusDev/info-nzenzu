@@ -102,6 +102,7 @@ export function ProfileForm({ user }: { user: User }) {
           {...register('name')}
           id='name'
           placeholder='Seu nome completo'
+          className='py-0.5'
         />
         {errors.name && <LabelError message={errors.name.message!} />}
       </div>
@@ -113,6 +114,7 @@ export function ProfileForm({ user }: { user: User }) {
           id='username'
           type='text'
           placeholder='Seu utilizador'
+          className='py-0.5'
         />
         {errors.username && <LabelError message={errors.username.message!} />}
       </div>
@@ -124,6 +126,7 @@ export function ProfileForm({ user }: { user: User }) {
           id='password'
           type='password'
           placeholder='••••••••'
+          className='py-0.5'
         />
         {errors.password && <LabelError message={errors.password.message!} />}
       </div>
@@ -135,6 +138,7 @@ export function ProfileForm({ user }: { user: User }) {
           id='confirm-password'
           type='password'
           placeholder='••••••••'
+          className='py-0.5'
         />
         {errors.confirmPassword && (
           <LabelError message={errors.confirmPassword.message!} />

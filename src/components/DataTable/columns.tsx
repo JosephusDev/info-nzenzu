@@ -14,6 +14,7 @@ import { Button } from '../ui/button'
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 import { MoreHorizontal } from 'lucide-react'
+<<<<<<< HEAD
 =======
 =======
 >>>>>>> Stashed changes
@@ -23,6 +24,10 @@ import { ArrowsUpFromLine, MoreHorizontal, Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 >>>>>>> Stashed changes
+=======
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+>>>>>>> 0da18f9fbd6d8cffb5a82d96bd0482b571c9626f
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -43,6 +48,33 @@ export const columns: ColumnDef<User>[] = [
     header: 'Ações',
     cell: ({ row }) => {
       const user = row.original
+      const router = useRouter()
+
+      const handlePromote = async () => {
+        if (user.level === 'ADMIN') {
+          toast.info('Usuário já é administrador')
+          return
+        }
+
+        try {
+          const response = await fetch('/api/users/promote', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: user.id }),
+          })
+
+          if (!response.ok) {
+            throw new Error('Erro ao promover usuário')
+          }
+
+          toast.success('Usuário promovido com sucesso')
+          router.refresh()
+        } catch (error) {
+          toast.error('Erro ao promover usuário')
+        }
+      }
 
       const handleDelete = async () => {
         try {
@@ -117,6 +149,7 @@ export const columns: ColumnDef<User>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(user.id)}
@@ -140,6 +173,10 @@ export const columns: ColumnDef<User>[] = [
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+            <DropdownMenuItem onClick={handlePromote}>
+              Promover
+>>>>>>> 0da18f9fbd6d8cffb5a82d96bd0482b571c9626f
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

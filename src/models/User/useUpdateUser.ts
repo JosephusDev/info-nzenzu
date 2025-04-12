@@ -6,7 +6,12 @@ import { revalidateTag } from 'next/cache'
 
 const scryptAsync = promisify(scrypt)
 
-export async function updateUser({ id, data }: { id: string; data: User }) {
+interface UpdateUserParams {
+  id: string
+  data: Partial<User>
+}
+
+export async function updateUser({ id, data }: UpdateUserParams) {
   try {
     if (data.password) {
       const salt = randomBytes(16).toString('hex')
