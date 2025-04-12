@@ -10,7 +10,13 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 import { Button } from '../ui/button'
+<<<<<<< Updated upstream
 import { MoreHorizontal } from 'lucide-react'
+=======
+import { ArrowsUpFromLine, MoreHorizontal, Trash } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
+>>>>>>> Stashed changes
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -32,6 +38,27 @@ export const columns: ColumnDef<User>[] = [
     cell: ({ row }) => {
       const user = row.original
 
+      const handleDelete = async () => {
+        try {
+          const response = await fetch('/api/users', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: user.id }),
+          })
+
+          if (!response.ok) {
+            throw new Error('Erro ao eliminar usuário do banco de dados')
+          }
+
+          toast.success('Usuário eliminado com sucesso')
+          router.refresh()
+        } catch (error) {
+          toast.error('Erro ao eliminar usuário cadastrado')
+        }
+      }
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -42,6 +69,7 @@ export const columns: ColumnDef<User>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
+<<<<<<< Updated upstream
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(user.id)}
             >
@@ -51,6 +79,13 @@ export const columns: ColumnDef<User>[] = [
               onClick={() => navigator.clipboard.writeText(user.password)}
             >
               Administrador
+=======
+            <DropdownMenuItem onClick={handlePromote}>
+              <ArrowsUpFromLine /> Promover
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDelete}>
+              <Trash /> Eliminar
+>>>>>>> Stashed changes
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

@@ -3,6 +3,7 @@ import { updateUser } from '@/models/User/useUpdateUser'
 import { verifySession } from '@/lib/dal'
 import { User } from '@prisma/client'
 import { createUser } from '@/models/User/useCreateUser'
+import { deleteUser } from '@/models/User/useDeleteUser'
 
 export async function POST(request: Request) {
   try {
@@ -39,6 +40,32 @@ export async function PUT(request: Request) {
     return NextResponse.json(
       { error: 'Erro ao atualizar usuário' },
       { status: 500 },
+    )
+  }
+}
+
+export async function DELETE(request: Request) {
+  try {
+    const { isAuth, userId } = await verifySession()
+
+    if (!isAuth) {
+      return NextResponse.json({ error: 'Não autorizado' }, { status: 401 })
+    }
+
+    const { id } = await request.json()
+
+    if (!id) {
+      return NextResponse.json({ error: 'ID is required' }, { status: 400 })
+    }
+
+    const user = await deleteUser(id)
+    
+    return NextResponse.json(user)
+  } catch (error) {
+    console.error('Error deleting user:', error)
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
     )
   }
 }
