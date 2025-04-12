@@ -11,6 +11,8 @@ import {
 } from '../ui/dropdown-menu'
 import { Button } from '../ui/button'
 import { MoreHorizontal } from 'lucide-react'
+import { useRouter } from 'next/navigation'
+import { toast } from 'sonner'
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -31,6 +33,33 @@ export const columns: ColumnDef<User>[] = [
     header: 'Ações',
     cell: ({ row }) => {
       const user = row.original
+      const router = useRouter()
+
+      const handlePromote = async () => {
+        if (user.level === 'ADMIN') {
+          toast.info('Usuário já é administrador')
+          return
+        }
+
+        try {
+          const response = await fetch('/api/users/promote', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: user.id }),
+          })
+
+          if (!response.ok) {
+            throw new Error('Erro ao promover usuário')
+          }
+
+          toast.success('Usuário promovido com sucesso')
+          router.refresh()
+        } catch (error) {
+          toast.error('Erro ao promover usuário')
+        }
+      }
 
       return (
         <DropdownMenu>
@@ -42,15 +71,8 @@ export const columns: ColumnDef<User>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(user.id)}
-            >
-              Usuário
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(user.password)}
-            >
-              Administrador
+            <DropdownMenuItem onClick={handlePromote}>
+              Promover
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>

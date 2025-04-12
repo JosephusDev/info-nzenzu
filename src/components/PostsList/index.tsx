@@ -5,7 +5,6 @@ import { useEffect, useRef } from 'react'
 import { Post } from '@/components/Post'
 import { usePosts } from '@/hooks/usePosts'
 import { motion } from 'framer-motion'
-import { Loader2 } from 'lucide-react'
 import { PostSkeleton } from '../skeleton/PostSkeleton'
 import { EmptyIcon } from '../EmptyIcon'
 
