@@ -8,9 +8,9 @@ import {
   DropdownMenuItem,
   DropdownMenuLabel,
   DropdownMenuTrigger,
-} from '../ui/dropdown-menu'
-import { Button } from '../ui/button'
-import { MoreHorizontal } from 'lucide-react'
+} from '../../ui/dropdown-menu'
+import { Button } from '../../ui/button'
+import { ArrowsUpFromLine, MoreHorizontal, Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
 
@@ -61,6 +61,27 @@ export const columns: ColumnDef<User>[] = [
         }
       }
 
+      const handleDelete = async () => {
+        try {
+          const response = await fetch('/api/users', {
+            method: 'DELETE',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ id: user.id }),
+          })
+
+          if (!response.ok) {
+            throw new Error('Erro ao eliminar usuário do banco de dados')
+          }
+
+          toast.success('Usuário eliminado com sucesso')
+          router.refresh()
+        } catch (error) {
+          toast.error('Erro ao eliminar usuário cadastrado')
+        }
+      }
+
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -72,7 +93,10 @@ export const columns: ColumnDef<User>[] = [
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuItem onClick={handlePromote}>
-              Promover
+              <ArrowsUpFromLine /> Promover
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={handleDelete}>
+              <Trash /> Eliminar
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
