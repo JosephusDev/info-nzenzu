@@ -10,24 +10,9 @@ import {
   DropdownMenuTrigger,
 } from '../ui/dropdown-menu'
 import { Button } from '../ui/button'
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-import { MoreHorizontal } from 'lucide-react'
-<<<<<<< HEAD
-=======
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
 import { ArrowsUpFromLine, MoreHorizontal, Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
->>>>>>> Stashed changes
-=======
-import { useRouter } from 'next/navigation'
-import { toast } from 'sonner'
->>>>>>> 0da18f9fbd6d8cffb5a82d96bd0482b571c9626f
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -97,48 +82,6 @@ export const columns: ColumnDef<User>[] = [
         }
       }
 
-      const handleDelete = async () => {
-        try {
-          const response = await fetch('/api/users', {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: user.id }),
-          })
-
-          if (!response.ok) {
-            throw new Error('Erro ao eliminar usuário do banco de dados')
-          }
-
-          toast.success('Usuário eliminado com sucesso')
-          router.refresh()
-        } catch (error) {
-          toast.error('Erro ao eliminar usuário cadastrado')
-        }
-      }
-
-      const handleDelete = async () => {
-        try {
-          const response = await fetch('/api/users', {
-            method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ id: user.id }),
-          })
-
-          if (!response.ok) {
-            throw new Error('Erro ao eliminar usuário do banco de dados')
-          }
-
-          toast.success('Usuário eliminado com sucesso')
-          router.refresh()
-        } catch (error) {
-          toast.error('Erro ao eliminar usuário cadastrado')
-        }
-      }
-
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -149,34 +92,11 @@ export const columns: ColumnDef<User>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
-<<<<<<< HEAD
-<<<<<<< Updated upstream
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(user.id)}
-            >
-              Usuário
-            </DropdownMenuItem>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(user.password)}
-            >
-              Administrador
-=======
             <DropdownMenuItem onClick={handlePromote}>
               <ArrowsUpFromLine /> Promover
             </DropdownMenuItem>
             <DropdownMenuItem onClick={handleDelete}>
               <Trash /> Eliminar
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
-=======
-            <DropdownMenuItem onClick={handlePromote}>
-              Promover
->>>>>>> 0da18f9fbd6d8cffb5a82d96bd0482b571c9626f
             </DropdownMenuItem>
           </DropdownMenuContent>
         </DropdownMenu>
