@@ -1,7 +1,7 @@
 'use client'
 
-import { User } from '@prisma/client'
-import { ColumnDef } from '@tanstack/react-table'
+import type { User } from '@prisma/client'
+import type { ColumnDef } from '@tanstack/react-table'
 import {
   DropdownMenu,
   DropdownMenuContent,
