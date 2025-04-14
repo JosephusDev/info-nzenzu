@@ -4,6 +4,7 @@ import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
 import Providers from './providers'
 import { ThemeProvider } from '@/contexts/ThemeContext'
+import { getTheme } from '@/lib/theme'
 
 const geistSans = Poppins({
   variable: '--font-geist-sans',
@@ -22,13 +23,29 @@ export const metadata: Metadata = {
   description: 'Website de informações da Universidade Nzenzu Estrela Uige',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const theme = await getTheme()
+
   return (
-    <html lang='pt'>
+    <html lang='pt' className={theme}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                const theme = '${theme}';
+                if (theme === 'dark') {
+                  document.documentElement.classList.add('dark');
+                }
+              })();
+            `,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

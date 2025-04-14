@@ -2,7 +2,7 @@ import { createClient } from '@/lib/supabase/client'
 
 const supabase = createClient()
 
-export async function deleteImageProfile(url: string) {
+export async function deleteImage(url: string, path: string) {
   try {
     // Extrair o nome do arquivo da URL
     const fileName = url.split('/').pop()
@@ -13,7 +13,7 @@ export async function deleteImageProfile(url: string) {
     // Deletar o arquivo do bucket
     const { error } = await supabase.storage
       .from('user-image')
-      .remove([`info-nzenzu/${fileName}`])
+      .remove([`${path}/${fileName}`])
 
     if (error) {
       throw error

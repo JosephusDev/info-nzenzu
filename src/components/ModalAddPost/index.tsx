@@ -27,6 +27,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { useQueryClient } from '@tanstack/react-query'
+import { ImageUpload } from '../UploadFiles'
 
 export function ModalAddPost() {
   const queryClient = useQueryClient()
@@ -40,12 +41,14 @@ export function ModalAddPost() {
     control,
     formState: { errors },
     reset,
+    setValue,
   } = useForm<PostFormData>({
     resolver: zodResolver(postSchema),
     defaultValues: {
       title: '',
       description: '',
       category: '',
+      image: null,
     },
   })
 
@@ -76,6 +79,10 @@ export function ModalAddPost() {
     } finally {
       setLoading(false)
     }
+  }
+
+  const handleUploadSuccess = async (url: string) => {
+    setValue('image', url)
   }
 
   return (
@@ -127,6 +134,7 @@ export function ModalAddPost() {
               <LabelError message={errors.category.message!} />
             )}
           </div>
+          <ImageUpload path='posts' onUploadSuccess={handleUploadSuccess} />
           <Button type='submit' disabled={loading} className='w-full'>
             {loading ? <Loader2 className='animate-spin' /> : 'Adicionar'}
           </Button>

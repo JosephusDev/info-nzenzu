@@ -5,8 +5,8 @@ import { useTheme } from '@/contexts/ThemeContext'
 
 export function PostSkeleton() {
   const { theme } = useTheme()
-  const backgroundColor = theme === 'dark' ? '#2d2d2d' : '#e0e0e0'
-  const foregroundColor = theme === 'dark' ? '#3d3d3d' : '#f5f5f5'
+  const backgroundColor = theme === 'dark' ? '#111111' : '#9ca3af'
+  const foregroundColor = theme === 'dark' ? '#1a1a1a' : '#f3f4f6'
 
   return (
     <div className='rounded-xl border bg-background shadow-sm overflow-hidden'>

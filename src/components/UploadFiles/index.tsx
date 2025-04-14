@@ -9,13 +9,17 @@ const supabase = createClient()
 
 interface FileUploadProps {
   onUploadSuccess?: (url: string) => void
+  path?: string
 }
 
-export function FileUpload({ onUploadSuccess }: FileUploadProps) {
+export function ImageUpload({
+  onUploadSuccess,
+  path = 'avatars',
+}: FileUploadProps) {
   const [processedUpload, setProcessedUpload] = useState(false)
   const props = useSupabaseUpload({
     bucketName: 'user-image',
-    path: 'info-nzenzu',
+    path: path,
     allowedMimeTypes: ['image/*'],
     maxFiles: 1,
     maxFileSize: 1000 * 1000 * 5,
@@ -32,7 +36,7 @@ export function FileUpload({ onUploadSuccess }: FileUploadProps) {
 
       const { data } = supabase.storage
         .from('user-image')
-        .getPublicUrl(`info-nzenzu/${newFileName}`)
+        .getPublicUrl(`${path}/${newFileName}`)
 
       onUploadSuccess?.(data.publicUrl)
       setProcessedUpload(true)

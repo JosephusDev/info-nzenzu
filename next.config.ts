@@ -8,11 +8,15 @@ const nextConfig: NextConfig = {
     },
   },
   images: {
-    domains: ['picsum.photos', 'lh5.googleusercontent.com'],
+    domains: ['picsum.photos', 'rbkzdxccqxasqaqrlhum.supabase.co'],
     remotePatterns: [
       {
         protocol: 'https',
         hostname: 'picsum.photos',
+      },
+      {
+        protocol: 'https',
+        hostname: 'rbkzdxccqxasqaqrlhum.supabase.co',
       },
     ],
   },

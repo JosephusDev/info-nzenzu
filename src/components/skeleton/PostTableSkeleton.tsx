@@ -6,12 +6,12 @@ export function PostTableSkeleton() {
       <div className='rounded-md border'>
         <div className='border-b'>
           <div className='grid grid-cols-6 gap-4 p-4'>
-            <Skeleton className='h-4 w-[100px]' />
-            <Skeleton className='h-4 w-[100px]' />
-            <Skeleton className='h-4 w-[100px]' />
-            <Skeleton className='h-4 w-[100px]' />
-            <Skeleton className='h-4 w-[100px]' />
-            <Skeleton className='h-4 w-[100px]' />
+            <Skeleton className='h-4 w-1/2' />
+            <Skeleton className='h-4 w-1/2' />
+            <Skeleton className='h-4 w-1/2' />
+            <Skeleton className='h-4 w-1/2' />
+            <Skeleton className='h-4 w-1/2' />
+            <Skeleton className='h-4 w-1/2' />
           </div>
         </div>
         {Array.from({ length: 3 }).map((_, index) => (

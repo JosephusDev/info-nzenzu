@@ -27,7 +27,7 @@ export async function getPosts({
       },
     },
     orderBy: {
-      created_at: 'desc',
+      title: 'asc',
     },
     skip,
     take: limit,

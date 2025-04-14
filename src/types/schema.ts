@@ -135,6 +135,12 @@ export const postSchema = z.object({
     .max(50, {
       message: 'A categoria não pode ter mais de 50 caracteres',
     }),
+  image: z
+    .string()
+    .url({
+      message: 'URL inválida para a imagem do post',
+    })
+    .nullable(),
 })
 
 export type PostFormData = z.infer<typeof postSchema>

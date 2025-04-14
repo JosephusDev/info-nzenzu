@@ -1,6 +1,6 @@
 import DashboardContent from '@/components/Dashboard'
-import { DataTable } from '@/components/DataTable'
-import { columns } from '@/components/DataTable/columns/user'
+import { DataTable } from '@/components/UserTable'
+import { columns } from '@/components/UserTable/columns/user'
 import { ModalAddUser } from '@/components/ModalAddUser'
 import { verifySession } from '@/lib/dal'
 import { useFetchUsers } from '@/models/User/useFetchUsers'

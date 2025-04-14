@@ -1,6 +1,6 @@
 import prisma from '@/lib/prisma'
 import { revalidateTag } from 'next/cache'
-import { deleteImageProfile } from '@/hooks/use-supabase-delete'
+import { deleteImage } from '@/hooks/use-supabase-delete'
 
 export async function deleteUser(id: string) {
   try {
@@ -15,7 +15,7 @@ export async function deleteUser(id: string) {
 
     // Se o usuário tiver uma imagem, deletar do Supabase
     if (user.avatarImage) {
-      await deleteImageProfile(user.avatarImage)
+      await deleteImage(user.avatarImage, 'avatars')
     }
 
     // Deletar o usuário do banco de dados

@@ -13,7 +13,7 @@ import { User } from '@prisma/client'
 import { z } from 'zod'
 import { useState } from 'react'
 import { Loader2 } from 'lucide-react'
-import { FileUpload } from '../UploadFiles'
+import { ImageUpload } from '../UploadFiles'
 
 type FormData = z.infer<typeof userSchema>
 
@@ -145,7 +145,7 @@ export function ProfileForm({ user }: { user: User }) {
         )}
       </div>
 
-      <FileUpload onUploadSuccess={handleUploadSuccess} />
+      <ImageUpload onUploadSuccess={handleUploadSuccess} />
 
       <Button type='submit' className='w-full' disabled={isLoading}>
         {isLoading ? <Loader2 className='animate-spin' /> : 'Salvar alterações'}

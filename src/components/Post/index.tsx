@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader } from '../ui/card'
 import { Badge } from '../ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '../ui/avatar'
-import { formatDate, formatedName } from '@/utils'
+import { formatDateDistanceToNow, formatedName } from '@/utils'
 import { PostProps } from '@/types'
 import { cn } from '@/lib/utils'
 import Image from 'next/image'
@@ -71,7 +71,7 @@ export function Post({
         </Avatar>
         <div className='flex flex-col sm:flex-row text-xs md:text-sm justify-between w-full'>
           <span>{post.user.name}</span>
-          <span>{formatDate(post.created_at!)}</span>
+          <span>{formatDateDistanceToNow(post.created_at!)}</span>
         </div>
       </div>
     </Card>
