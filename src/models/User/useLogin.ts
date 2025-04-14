@@ -1,7 +1,6 @@
 import prisma from '@/lib/prisma'
 import { User } from '@prisma/client'
 import { scrypt } from 'crypto'
-import { revalidateTag } from 'next/cache'
 import { promisify } from 'util'
 
 const scryptAsync = promisify(scrypt)
@@ -29,7 +28,6 @@ export async function useLogin({
     if (hashedPasswordBuffer.toString('hex') !== hashedPassword) {
       throw new Error('Palavra-passe incorreta')
     }
-    revalidateTag('get-user')
     return user
   } catch (error: any) {
     // Se o erro já tem uma mensagem conhecida, repasse-a

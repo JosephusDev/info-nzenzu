@@ -1,18 +1,20 @@
 import type { Metadata } from 'next'
-import { Nunito, Nunito_Sans } from 'next/font/google'
+import { Poppins } from 'next/font/google'
 import { Toaster } from '@/components/ui/sonner'
 import './globals.css'
-import { QueryClient } from '@tanstack/react-query'
 import Providers from './providers'
+import { ThemeProvider } from '@/contexts/ThemeContext'
 
-const geistSans = Nunito_Sans({
+const geistSans = Poppins({
   variable: '--font-geist-sans',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
 })
 
-const geistMono = Nunito({
+const geistMono = Poppins({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+  weight: ['400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -25,15 +27,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const queryClient = new QueryClient()
   return (
     <html lang='pt'>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className='font-[family-name:var(--font-geist-sans)]'>
-          <Providers>{children}</Providers>
-        </div>
+        <ThemeProvider>
+          <div className='font-[family-name:var(--font-geist-sans)]'>
+            <Providers>{children}</Providers>
+          </div>
+        </ThemeProvider>
         <Toaster richColors />
       </body>
     </html>

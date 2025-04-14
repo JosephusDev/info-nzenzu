@@ -47,7 +47,7 @@ export function Post({
         <Badge>{post.category}</Badge>
         <h1
           className={cn(
-            'sm:text-lg text-sm font-bold my-2',
+            'sm:text-base text-sm my-2',
             isIndividual ? 'text-justify' : 'line-clamp-2',
           )}
         >
@@ -69,7 +69,7 @@ export function Post({
           <AvatarFallback>{formatedName(post.user.name)}</AvatarFallback>
           <AvatarImage src={post.user.avatarImage!} alt='Avatar' />
         </Avatar>
-        <div className='flex flex-col sm:flex-row text-xs md:text-sm text-gray-500 justify-between w-full'>
+        <div className='flex flex-col sm:flex-row text-xs md:text-sm justify-between w-full'>
           <span>{post.user.name}</span>
           <span>{formatDate(post.created_at!)}</span>
         </div>

@@ -1,5 +1,7 @@
 import { getPosts } from '@/models/Post/useFetchPosts'
 import { type NextRequest, NextResponse } from 'next/server'
+import { useCreatePost } from '@/models/Post/useCreatePost'
+import { revalidatePublishedPosts } from '@/models/Post/useFetchPublishedPosts'
 
 export async function GET(req: NextRequest) {
   const { searchParams } = req.nextUrl
@@ -22,6 +24,21 @@ export async function GET(req: NextRequest) {
     return NextResponse.json(data)
   } catch (error) {
     console.error('Error fetching posts:', error)
+    return NextResponse.json(
+      { error: 'Internal Server Error' },
+      { status: 500 },
+    )
+  }
+}
+
+export async function POST(req: NextRequest) {
+  try {
+    const body = await req.json()
+    const post = await useCreatePost(body)
+    await revalidatePublishedPosts()
+    return NextResponse.json(post)
+  } catch (error) {
+    console.error('Error creating post:', error)
     return NextResponse.json(
       { error: 'Internal Server Error' },
       { status: 500 },

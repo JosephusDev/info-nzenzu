@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server'
 import { updateUser } from '@/models/User/useUpdateUser'
 import { verifySession } from '@/lib/dal'
-import { revalidateTag } from 'next/cache'
+import { revalidateUsers } from '@/models/User/useFetchUsers'
 
 export async function POST(request: Request) {
   try {
@@ -19,7 +19,7 @@ export async function POST(request: Request) {
       data: { level: 'ADMIN' },
     })
 
-    revalidateTag('get-users')
+    await revalidateUsers()
 
     return NextResponse.json(user)
   } catch (error) {

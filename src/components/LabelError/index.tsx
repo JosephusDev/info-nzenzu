@@ -1,3 +1,3 @@
 export function LabelError({ message }: { message: string }) {
-  return <span className='text-red-500 text-xs sm:text-sm'>* {message}</span>
+  return <span className='text-red-400 text-xs'>* {message}</span>
 }

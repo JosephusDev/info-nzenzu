@@ -13,6 +13,8 @@ import { Button } from '../../ui/button'
 import { ArrowsUpFromLine, MoreHorizontal, Trash } from 'lucide-react'
 import { useRouter } from 'next/navigation'
 import { toast } from 'sonner'
+import { Avatar, AvatarFallback, AvatarImage } from '../../ui/avatar'
+import { formatedName } from '@/utils'
 
 export const columns: ColumnDef<User>[] = [
   {
@@ -26,6 +28,19 @@ export const columns: ColumnDef<User>[] = [
   {
     accessorKey: 'level',
     header: 'Nivel de Acesso',
+  },
+  {
+    accessorKey: 'avatar',
+    header: 'Imagem',
+    cell: ({ row }) => {
+      const user = row.original
+      return (
+        <Avatar>
+          <AvatarImage src={user.avatarImage!} alt={user.name} />
+          <AvatarFallback>{formatedName(user.name)}</AvatarFallback>
+        </Avatar>
+      )
+    },
   },
   {
     id: 'actions',
@@ -90,7 +105,10 @@ export const columns: ColumnDef<User>[] = [
               <MoreHorizontal />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
+          <DropdownMenuContent
+            className='font-[family-name:var(--font-geist-sans)]'
+            align='end'
+          >
             <DropdownMenuLabel>Ações</DropdownMenuLabel>
             <DropdownMenuItem onClick={handlePromote}>
               <ArrowsUpFromLine /> Promover

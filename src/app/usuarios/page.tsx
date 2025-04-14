@@ -2,10 +2,17 @@ import DashboardContent from '@/components/Dashboard'
 import { DataTable } from '@/components/DataTable'
 import { columns } from '@/components/DataTable/columns/user'
 import { ModalAddUser } from '@/components/ModalAddUser'
+import { verifySession } from '@/lib/dal'
 import { useFetchUsers } from '@/models/User/useFetchUsers'
-
+import { redirect } from 'next/navigation'
 export default async function Page() {
   const userData = await useFetchUsers()
+  const { level } = await verifySession()
+
+  if (!level) {
+    redirect('/dashboard')
+  }
+
   return (
     <DashboardContent>
       <div className='flex flex-col w-full h-full'>

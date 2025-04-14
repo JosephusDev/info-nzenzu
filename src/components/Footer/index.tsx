@@ -81,7 +81,7 @@ export default function Footer() {
           </div>
           <div className='sm:w-full md:w-full lg:w-3/5'>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <Card className='w-full border-0 shadow-0 rounded-sm'>
+              <Card className='w-full border-0 shadow-0 rounded-xl'>
                 <CardContent className='flex flex-col gap-2'>
                   <h1 className='text-base font-bold text-center'>
                     Newsletter

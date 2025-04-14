@@ -10,7 +10,7 @@ import {
   TableRow,
 } from '@/components/ui/table'
 import { usePostsForAdmin } from '@/hooks/usePosts'
-import { PostTableSkeleton } from '../skeleton/PostTableSkeleton'
+import { PostTableSkeleton } from '@/components/skeleton/PostTableSkeleton'
 import { CheckIcon, XIcon, Trash2 } from 'lucide-react'
 import MyPagination from '../Pagination'
 import { formatDate } from '@/utils'
@@ -103,11 +103,7 @@ export function PostsTable() {
                 <TableRow key={post.id}>
                   <TableCell>{post.title}</TableCell>
                   <TableCell>
-                    {post.published ? (
-                      <span className='text-green-500'>Sim</span>
-                    ) : (
-                      <span className='text-red-500'>Não</span>
-                    )}
+                    {post.published ? <span>Sim</span> : <span>Não</span>}
                   </TableCell>
                   <TableCell>{post.category}</TableCell>
                   <TableCell>{post.user.name}</TableCell>
@@ -130,7 +126,7 @@ export function PostsTable() {
                         size='icon'
                         onClick={() => handleDelete(post.id)}
                       >
-                        <Trash2 size={20} className='text-red-500' />
+                        <Trash2 size={20} />
                       </Button>
                     </div>
                   </TableCell>

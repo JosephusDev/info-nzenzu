@@ -9,12 +9,12 @@ export function InputIcon({ icon, className, ...props }: InputIconProps) {
   return (
     <div
       className={cn(
-        'border-[1px] rounded-lg border-gray-400 flex flex-row items-center gap-2 pr-2',
+        'border-[1px] rounded-lg flex flex-row items-center gap-2 pr-2 bg-background',
         className,
       )}
     >
       <Input
-        className='shadow-background border-0 focus-visible:ring-0 focus-visible:outline-none'
+        className='text-sm shadow-background dark:bg-background border-0 focus-visible:ring-0 focus-visible:outline-none'
         {...props}
       />
       {icon}

@@ -5,10 +5,12 @@ import { Search, Sun, Moon, Menu, X, Box } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
 import { ModalSearch } from '../ModalSearch'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [isCompact, setIsCompact] = useState(false)
+  const { theme, toggleTheme } = useTheme()
 
   useEffect(() => {
     const handleResize = () => {
@@ -27,7 +29,7 @@ export default function Navbar() {
           {/* Logo */}
           <Link href='/' className='flex items-center justify-center gap-2'>
             <Box />
-            <span className='text-xl'>
+            <span className='text-lg sm:text-xl'>
               Info<span className='font-bold'>Nzenzu</span>
             </span>
           </Link>
@@ -68,8 +70,12 @@ export default function Navbar() {
               <ModalSearch />
             </div>
 
-            <Button variant='ghost' size='icon'>
-              <Sun className='w-6 h-6' />
+            <Button variant='ghost' size='icon' onClick={toggleTheme}>
+              {theme === 'light' ? (
+                <Moon className='w-6 h-6' />
+              ) : (
+                <Sun className='w-6 h-6' />
+              )}
             </Button>
 
             {/* Botão de menu para mobile e telas menores */}

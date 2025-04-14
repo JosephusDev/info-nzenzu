@@ -83,7 +83,7 @@ export function ModalAddPost() {
       <DialogTrigger asChild>
         <Button>Adicionar</Button>
       </DialogTrigger>
-      <DialogContent>
+      <DialogContent className='w-[90%] top-20 translate-y-0 font-[family-name:var(--font-geist-sans)]'>
         <DialogHeader>
           <DialogTitle>Adicionar</DialogTitle>
         </DialogHeader>
@@ -112,7 +112,7 @@ export function ModalAddPost() {
                   <SelectTrigger className='w-full'>
                     <SelectValue placeholder='Selecione a categoria' />
                   </SelectTrigger>
-                  <SelectContent>
+                  <SelectContent className='font-[family-name:var(--font-geist-sans)]'>
                     <SelectItem value='Desporto'>Desporto</SelectItem>
                     <SelectItem value='Entretenimento'>
                       Entretenimento

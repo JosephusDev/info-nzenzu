@@ -4,12 +4,13 @@ import { verifySession } from '@/lib/dal'
 import { User } from '@prisma/client'
 import { createUser } from '@/models/User/useCreateUser'
 import { deleteUser } from '@/models/User/useDeleteUser'
-
+import { revalidateUsers } from '@/models/User/useFetchUsers'
 export async function POST(request: Request) {
   try {
     const body: User = await request.json()
 
     const user = await createUser(body)
+    await revalidateUsers()
     return NextResponse.json(user)
   } catch (error) {
     return NextResponse.json(
@@ -35,6 +36,7 @@ export async function PUT(request: Request) {
     }
 
     const user = await updateUser({ id, data })
+    await revalidateUsers()
     return NextResponse.json(user)
   } catch (error) {
     return NextResponse.json(
@@ -59,13 +61,13 @@ export async function DELETE(request: Request) {
     }
 
     const user = await deleteUser(id)
-    
+    await revalidateUsers()
     return NextResponse.json(user)
   } catch (error) {
     console.error('Error deleting user:', error)
     return NextResponse.json(
       { error: 'Internal server error' },
-      { status: 500 }
+      { status: 500 },
     )
   }
 }

@@ -63,7 +63,7 @@ export function LoginForm({
         <CardHeader>
           <CardTitle className='flex flex-col items-center gap-2'>
             <Box />
-            <span className='text-xl text-gray-900 dark:text-white'>
+            <span className='text-lg sm:text-xl text-gray-900 dark:text-white'>
               Info<span className='font-extrabold dark:text-white'>Nzenzu</span>
             </span>
           </CardTitle>

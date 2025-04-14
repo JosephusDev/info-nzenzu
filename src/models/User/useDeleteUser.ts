@@ -1,16 +1,31 @@
 import prisma from '@/lib/prisma'
-import { User } from '@prisma/client'
-import { scrypt, randomBytes } from 'crypto'
 import { revalidateTag } from 'next/cache'
+import { deleteImageProfile } from '@/hooks/use-supabase-delete'
 
 export async function deleteUser(id: string) {
   try {
-  const user = await prisma.user.delete({
-    where: { id },
-  })
+    // Primeiro, buscar o usuário para verificar se tem imagem
+    const user = await prisma.user.findUnique({
+      where: { id },
+    })
+
+    if (!user) {
+      throw new Error('Usuário não encontrado')
+    }
+
+    // Se o usuário tiver uma imagem, deletar do Supabase
+    if (user.avatarImage) {
+      await deleteImageProfile(user.avatarImage)
+    }
+
+    // Deletar o usuário do banco de dados
+    const deletedUser = await prisma.user.delete({
+      where: { id },
+    })
+
     revalidateTag('get-users')
-    return user
+    return deletedUser
   } catch (error) {
-    throw new Error('Error creating user')
+    throw new Error('Erro ao deletar usuário')
   }
 }

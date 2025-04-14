@@ -1,8 +1,13 @@
 'use client'
 
 import ContentLoader from 'react-content-loader'
+import { useTheme } from '@/contexts/ThemeContext'
 
 export function PostSkeleton() {
+  const { theme } = useTheme()
+  const backgroundColor = theme === 'dark' ? '#2d2d2d' : '#e0e0e0'
+  const foregroundColor = theme === 'dark' ? '#3d3d3d' : '#f5f5f5'
+
   return (
     <div className='rounded-xl border bg-background shadow-sm overflow-hidden'>
       <ContentLoader
@@ -10,8 +15,8 @@ export function PostSkeleton() {
         width='100%'
         height={220}
         viewBox='0 20 400 250'
-        backgroundColor='#e0e0e0'
-        foregroundColor='#f5f5f5'
+        backgroundColor={backgroundColor}
+        foregroundColor={foregroundColor}
         className='w-full'
       >
         {/* Top image */}

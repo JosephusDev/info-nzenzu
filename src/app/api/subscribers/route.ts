@@ -1,4 +1,3 @@
-import { createSession } from '@/lib/session'
 import { useCreateSubscriber } from '@/models/Subscribers/useCreateSubscriber'
 import { subscriberSchema } from '@/types/schema'
 import { NextRequest, NextResponse } from 'next/server'

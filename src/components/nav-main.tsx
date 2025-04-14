@@ -24,9 +24,7 @@ export function NavMain({
 }) {
   return (
     <SidebarGroup>
-      <SidebarGroupLabel className='text-lg font-bold mb-4'>
-        Menu
-      </SidebarGroupLabel>
+      <SidebarGroupLabel className='text-sm mb-4'>Menu</SidebarGroupLabel>
       <SidebarMenu>
         {items.map(item => (
           <Collapsible
@@ -39,7 +37,7 @@ export function NavMain({
               <Link href={item.url}>
                 <SidebarMenuButton tooltip={item.title}>
                   {item.icon && <item.icon />}
-                  <span className='text-base font-semibold'>{item.title}</span>
+                  <span className='text-base'>{item.title}</span>
                 </SidebarMenuButton>
               </Link>
             </SidebarMenuItem>

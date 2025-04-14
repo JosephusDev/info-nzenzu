@@ -57,7 +57,7 @@ export function PostsList({ search = '' }: { search?: string }) {
 
   return (
     <div>
-      <h1 className='text-2xl font-semibold px-6 md:px-20 lg:px-20 mb-5'>
+      <h1 className='text-lg sm:text-xl font-semibold px-6 md:px-20 lg:px-20 mb-5'>
         Últimas postagens
       </h1>
       {/* Grid com os cards dos posts */}

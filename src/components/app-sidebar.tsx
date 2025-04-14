@@ -22,7 +22,7 @@ const data = {
     },
     {
       title: 'Usuários',
-      url: '/dashboard/usuarios',
+      url: '/usuarios',
       icon: Users,
     },
   ],

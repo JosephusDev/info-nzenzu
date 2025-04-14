@@ -17,7 +17,11 @@ export async function POST(req: NextRequest) {
     const data = await useLogin(body)
 
     if (data.id) {
-      await createSession(data.id)
+      if (data.level == 'ADMIN') {
+        await createSession(data.id, data.level)
+      } else {
+        await createSession(data.id)
+      }
     }
 
     return NextResponse.json(data)

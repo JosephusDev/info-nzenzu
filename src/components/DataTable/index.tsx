@@ -20,6 +20,8 @@ import {
 import { EmptyIcon } from '../EmptyIcon'
 import { Input } from '../ui/input'
 import { Button } from '../ui/button'
+import { InputIcon } from '../InputIcon'
+import { Search } from 'lucide-react'
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[]
@@ -53,13 +55,16 @@ export function DataTable<TData, TValue>({
     <div className='w-full h-full flex flex-col gap-4'>
       {showFilter && filterColumn && (
         <div>
-          <Input
+          <InputIcon
             placeholder={placeholder}
-            value={(table.getColumn(filterColumn)?.getFilterValue() as string) ?? ''}
+            value={
+              (table.getColumn(filterColumn)?.getFilterValue() as string) ?? ''
+            }
             onChange={event =>
               table.getColumn(filterColumn)?.setFilterValue(event.target.value)
             }
-            className='max-w-sm'
+            className='max-w-xs py-0.5'
+            icon={<Search size={16} />}
           />
         </div>
       )}

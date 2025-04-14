@@ -28,7 +28,7 @@ export function ModalSearch() {
       <DialogTrigger asChild>
         <Button
           variant={'outline'}
-          className='rounded-4xl gap-2 w-full text-gray-400'
+          className='rounded-xl gap-2 w-full text-gray-400'
         >
           <Search size={20} />
           Pesquisar...
@@ -36,7 +36,7 @@ export function ModalSearch() {
       </DialogTrigger>
       <DialogContent className='w-[90%] top-20 translate-y-0 font-[family-name:var(--font-geist-sans)]'>
         <DialogHeader>
-          <DialogTitle className='text-center font-bold'>
+          <DialogTitle className='text-center font- text-sm sm:text-xl'>
             O que você procura?
           </DialogTitle>
         </DialogHeader>
@@ -80,7 +80,9 @@ export function ModalSearch() {
               )}
             </div>
           ) : (
-            <p className='text-center'>Nenhuma busca recente.</p>
+            <p className='text-center text-sm sm:text-base'>
+              Nenhuma busca recente.
+            </p>
           )}
         </div>
       </DialogContent>
