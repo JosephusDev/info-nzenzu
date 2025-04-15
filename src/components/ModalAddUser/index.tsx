@@ -159,7 +159,7 @@ export function ModalAddUser() {
                       <SelectTrigger className='w-full'>
                         <SelectValue placeholder='Selecione o Nível de acesso' />
                       </SelectTrigger>
-                      <SelectContent>
+                      <SelectContent className='font-[family-name:var(--font-geist-sans)]'>
                         <SelectItem value='USER'>Usuário Normal</SelectItem>
                         <SelectItem value='ADMIN'>Administrador</SelectItem>
                       </SelectContent>

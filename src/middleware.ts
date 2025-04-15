@@ -24,23 +24,18 @@ export default async function middleware(req: NextRequest) {
   }
 
   // 5. Check if user is admin for admin routes
-  if (isAdminRoute && !session?.level) {
+  if (isAdminRoute && session?.userId && !session?.level) {
     return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
   }
 
   // 6. Redirect to /dashboard if the user is authenticated
-  if (
-    isPublicRoute &&
-    session?.userId &&
-    !req.nextUrl.pathname.startsWith('/dashboard')
-  ) {
+  if (session?.userId && req.nextUrl.pathname.startsWith('/login')) {
     return NextResponse.redirect(new URL('/dashboard', req.nextUrl))
   }
 
   return NextResponse.next()
 }
 
-// Routes Middleware should not run on
 export const config = {
-  matcher: ['/((?!api|_next/static|_next/image|.*\\.png$).*)'],
+  matcher: ['/', '/usuarios/:path*', '/dashboard/:path*', '/login'],
 }
